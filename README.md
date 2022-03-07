@@ -50,7 +50,7 @@ df = api.get_top_view_per_country(request)
         returned data. Also, views produced by agents categorized as bots or web crawlers will 
         be excluded from all calculations, if all-days is specified in the day parameter, all data
         within the specified month will be returned
-     +  Diagrams
+     +  ![alt tag](./diagram/GetTopViewed.png)
 
 
 ## Comparison
