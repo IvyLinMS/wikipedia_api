@@ -29,6 +29,9 @@ request = TopViewedPerCountryRequest("US", AccessMethod.MOBILE_WEB, 2021, 2, 'al
 api.get_top_view_per_country(request)
 
 
+## Design considerations
+
+
 ## Components
 
 + TODO
@@ -45,4 +48,12 @@ api.get_top_view_per_country(request)
         be excluded from all calculations, if all-days is specified in the day parameter, all data
         within the specified month will be returned
      +  Diagrams
+
+
+## Comparison
+
+## Limitation
+
+## Next Step
+
      
