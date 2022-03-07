@@ -8,4 +8,15 @@
   + Some of the API could set hourly, daily, monthly granularity, but the date format specified required to pass in hour information even user didn't specify to get the data at hourly granularity level
   + Aggregated page view API has two version, one for legacy data from 12/01/2007 to 07/01/2015, while another API provide data after 07/01/2015, if user need to get data from after 12/01/2007 to a date after 07/01/2015, user will have to explicit call the two API separately and provide different set of parameters for access method or agent type
   + Top viewed article per country API only support daily granularity without monthly level support
+  
  
+## Project Ideas
+
++ This project is trying to provide a client library for the wikipedia page view APIs to address above issues.
+  + Encapsulate the detail calling Restful API and parsing of json data, with returned panda data frame that available for further processing
+  + Initialize once wikipedia project and API headers without providing for each API call
+  + Strong typed access method, agent type, granularity enumeration to avoid accident error
+  + Strong typed request data structure for easy future extension or change if the underlying API changed to have more parameters
+  + Flexible data range format support
+  + Parameter validation with detail error result
+  
