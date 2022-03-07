@@ -27,12 +27,9 @@ This project is trying to provide a client library for the wikipedia page view A
 ## Usage
 
 api_header = APIHeader(user_agent= 'https://github.com/IvyLinMS', call_from= 'ivylin@uw.edu')
-
 api = WikipediaPageViewAPILib(api_header, "en.wikipedia")
-
 request = TopViewedPerCountryRequest("US", AccessMethod.MOBILE_WEB, 2021, 2, 'all-days')
-
-api.get_top_view_per_country(request)
+df = api.get_top_view_per_country(request)
 
 
 ## Components
