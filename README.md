@@ -42,7 +42,7 @@ df = api.get_top_view_per_country(request)
   + API_endpoints
   + API_client
 + Interface
-+ Function get_top_view_per_country
++ Function <b>get_top_view_per_country</b>
      +  Lists the 1000 most viewed articles for a given country and date, across all projects. 
         Support filter by access method. Because of privacy reasons, pageview counts are given 
         in a bounded format and are not reported for certain countries. Furthermore, articles 
