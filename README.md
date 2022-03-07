@@ -13,6 +13,9 @@ Wikipedia provide a set of RESTful APIs to get Wikipedia's page view data. Users
 ## Project Ideas
 
 This project is trying to provide a client library for the wikipedia page view APIs to address above issues.
+
+## Design considerations
+
   + Encapsulate the detail calling Restful API and parsing of json data, with returned panda data frame that available for further processing
   + Initialize once wikipedia project and API headers without providing for each API call
   + Strong typed access method, agent type, granularity enumeration to avoid accident error
@@ -24,12 +27,12 @@ This project is trying to provide a client library for the wikipedia page view A
 ## Usage
 
 api_header = APIHeader(user_agent= 'https://github.com/IvyLinMS', call_from= 'ivylin@uw.edu')
+
 api = WikipediaPageViewAPILib(api_header, "en.wikipedia")
+
 request = TopViewedPerCountryRequest("US", AccessMethod.MOBILE_WEB, 2021, 2, 'all-days')
+
 api.get_top_view_per_country(request)
-
-
-## Design considerations
 
 
 ## Components
