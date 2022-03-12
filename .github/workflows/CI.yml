@@ -44,6 +44,7 @@ jobs:
     - name: generate coverage report
       run: |
         coverage report
+        coverage lcov -o ./coverage/lcov.info
     - name: Coveralls
       uses: coverallsapp/github-action@master
       with:
