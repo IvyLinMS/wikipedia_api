@@ -10,7 +10,7 @@ CLASSIFIERS = ["Environment :: Console",
 
 NAME = "wikipedia-api"
 DESCRIPTION = "A library enhance wikipedia RESTful API functionality"
-URL = "https://github.com/IvyLinGit/wikipedia_api"
+URL = "https://github.com/IvyLinMS/wikipedia_api"
 AUTHOR = "Weiqing (Ivy) Lin"
 AUTHOR_EMAIL = "ivylin@uw.edu"
 PLATFORMS = "Linux, Windows and MacOS"

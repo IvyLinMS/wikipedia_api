@@ -30,14 +30,15 @@ from wikipedia_api.pageviews.api_utils import (
 class WikipediaPageViewApiClient:
     """
     Wikipedia Page View API client wrapper,
-    Save common initialization parameter eg project or api header to avoid passing for 
-    each api call, use strong typed parameter to avoid error-prone str typed parameter
-    for access or agent or granularity type, do basic validation on user input such as 
-    date time format or invalid filter type or date range, and provided two extended 
-    functionalities
-        -- extend to combine both legacy and current page view api result for aggregated
-            page viwe API result, 
-        -- extend the top viewed artical per country api to support get result on whole month
+    Save common initialization parameter eg project or api header to avoid
+    passing for each api call, use strong typed parameter to avoid error-prone
+    str typed parameter for access or agent or granularity type, do basic
+    validation on user input such as date time format or invalid filter type
+    or date range, and provided two extended functionalities
+        -- extend to combine both legacy and current page view api result for
+        aggregated page viwe API result
+        -- extend the top viewed artical per country api to support get result
+        on whole month
     """
 
     def __init__(self, project: str, api_header: APIHeader) -> None:
@@ -63,18 +64,19 @@ class WikipediaPageViewApiClient:
         self, request: AggregatePageViewRequest
     ) -> pd.DataFrame:
         """
-        Given a date range, returns a timeseries of pageview counts. 
-        Support filter by access method and/or agent type, and choose between monthly, daily, hourly granularity
-        
-        if start time specified is between 12/01/2007 and 07/01/2015, legacy API data will be combined with
-        new page view API data
-        if agent type is set to MOBILE and date range include 07/01/2015, both the mobile-app and mobile-web 
-        data will be returned
-        
+        Given a date range, returns a timeseries of pageview counts.
+        Support filter by access method and/or agent type, and choose between
+        monthly, daily, hourly granularity
+        if start time specified is between 12/01/2007 and 07/01/2015, legacy
+        API data will be combined with new page view API data if agent type
+        is set to MOBILE and date range include 07/01/2015, both the
+        mobile-app and mobile-web data will be returned
         Args:
-            request (AggregatePageViewRequest): Request data for get aggregated page view
+            request (AggregatePageViewRequest): Request data for get
+            aggregated page view
         Raises:
-            InputException: User input error if start time or end time is invalid or out of supported range
+            InputException: User input error if start time or end time is
+            invalid or out of supported range
 
         Returns:
             pd.DataFrame: columns:
@@ -143,10 +145,11 @@ class WikipediaPageViewApiClient:
 
     def get_top_view_per_country(self, request: TopViewedPerCountryRequest):
         """
-        Lists the 1000 most viewed articles for a given country and date, across all projects. 
-        Support filter by access method. Because of privacy reasons, pageview counts are given 
-        in a bounded format and are not reported for certain countries. Furthermore, articles 
-        visited by 1000 unique individuals or fewer on the given date will be excluded from the 
+        Lists the 1000 most viewed articles for a given country and date,
+        across all projects. Support filter by access method. Because of 
+        privacy reasons, pageview counts are given in a bounded format and
+        are not reported for certain countries. Furthermore, articles visited
+        by 1000 unique individuals or fewer on the given date will be excluded from the 
         returned data. Also, views produced by agents categorized as bots or web crawlers will 
         be excluded from all calculations, if all-days is specified in the day parameter, all data
         within the specified month will be returned
