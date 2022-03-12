@@ -198,7 +198,7 @@ class WikipediaPageViewApiClientTest(unittest.TestCase):
         )
         df = client.get_aggregated_pageviews(request)
         expected_columns = set(
-            ["project", "access", "agent", "granularity", "timestamp", "views",]
+            ["project", "access", "agent", "granularity", "timestamp", "views"]
         )
         self.assertEqual(set(df.columns), expected_columns)
 
@@ -213,7 +213,7 @@ class WikipediaPageViewApiClientTest(unittest.TestCase):
         )
         df = client.get_aggregated_pageviews(request)
         expected_columns = set(
-            ["project", "access", "agent", "granularity", "timestamp", "views",]
+            ["project", "access", "agent", "granularity", "timestamp", "views"]
         )
         self.assertEqual(set(df.columns), expected_columns)
 
@@ -237,7 +237,7 @@ class WikipediaPageViewApiClientTest(unittest.TestCase):
         )
         with self.assertRaises(InputException):
             client.get_top_pageviews(request)
-            
+
         request = TopViewedArticleRequest(
             access=AccessMethod.ALL, year=2020, month=13, day=1,
         )
@@ -269,7 +269,7 @@ class WikipediaPageViewApiClientTest(unittest.TestCase):
         )
         df = client.get_top_pageviews(request)
         expected_columns = set(
-            ["project", "access", "year", "month", "day", "article", "views", "rank",]
+            ["project", "access", "year", "month", "day", "article", "views", "rank"]
         )
         self.assertEqual(set(df.columns), expected_columns)
 
@@ -374,9 +374,7 @@ class WikipediaPageViewApiClientTest(unittest.TestCase):
         )
         self.assertEqual(set(df.columns), expected_columns)
 
-    @patch(
-        "wikipedia_api.pageviews.api_client.rest_api_call"
-    )
+    @patch("wikipedia_api.pageviews.api_client.rest_api_call")
     def test_get_top_view_per_country_all_days(self, rest_api_call_mock: MagicMock):
 
         mock_data1 = """
@@ -476,4 +474,3 @@ class WikipediaPageViewApiClientTest(unittest.TestCase):
         self.assertEqual(df["views_ceil"][0], 1900)
         self.assertEqual(df["article"][1], "Deaths_in_2021")
         self.assertEqual(df["views_ceil"][1], 1500)
-

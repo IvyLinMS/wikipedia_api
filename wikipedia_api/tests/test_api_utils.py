@@ -2,7 +2,11 @@ from datetime import datetime
 import unittest
 from wikipedia_api.pageviews.api_constants import PageViewApiValidDateRange
 from wikipedia_api.pageviews.api_exceptions import InputException
-from wikipedia_api.pageviews.api_types import AccessMethod, AgentType, Granularity
+from wikipedia_api.pageviews.api_types import (
+    AccessMethod,
+    AgentType,
+    Granularity,
+)
 
 from wikipedia_api.pageviews.api_utils import (
     parse_start_end_time,

@@ -146,20 +146,23 @@ class WikipediaPageViewApiClient:
     def get_top_view_per_country(self, request: TopViewedPerCountryRequest):
         """
         Lists the 1000 most viewed articles for a given country and date,
-        across all projects. Support filter by access method. Because of 
+        across all projects. Support filter by access method. Because of
         privacy reasons, pageview counts are given in a bounded format and
         are not reported for certain countries. Furthermore, articles visited
-        by 1000 unique individuals or fewer on the given date will be excluded from the 
-        returned data. Also, views produced by agents categorized as bots or web crawlers will 
-        be excluded from all calculations, if all-days is specified in the day parameter, all data
-        within the specified month will be returned
+        by 1000 unique individuals or fewer on the given date will be excluded
+        from the returned data. Also, views produced by agents categorized as
+        bots or web crawlers will be excluded from all calculations, if
+        all-days is specified in the day parameter, all data within the
+        specified month will be returned
 
         Args:
-            request (TopViewedPerCountryRequest): Request data for get top page viewed article per country
+            request (TopViewedPerCountryRequest): Request data for get top
+            page viewed article per country
 
         Raises:
-            InputException: User input error if start time or end time is invalid or out of supported range
-            or MOBILE access method is specified as current page view API doesn't support this access type
+            InputException: User input error if start time or end time is
+            invalid or out of supported range or MOBILE access method is
+            specified as current page view API doesn't support this access type
 
         Returns:
             pd.DataFrame: columns:
@@ -195,27 +198,26 @@ class WikipediaPageViewApiClient:
         is_all_days = False
         try:
             day = int(day)
-        except:
+        except ValueError:
             if day != "all-days":
                 raise InputException(f"Day value {day} only accept 1-31 or all-days")
             is_all_days = True
 
+        api_start_time = PageViewApiValidDateRange.TOP_PER_COUNTRY_PAGEVIEW_API_START_DATE
         if is_all_days is not True:
             try:
                 date_time = datetime(year, month, day)
                 year = date_time.strftime("%Y")
                 month = date_time.strftime("%m")
                 day = date_time.strftime("%d")
-            except:
+            except ValueError:
                 raise InputException(f"Invalid date provide:{year}-{month}-{day}")
 
             # Validate start time
-            if (
-                date_time
-                < PageViewApiValidDateRange.TOP_PER_COUNTRY_PAGEVIEW_API_START_DATE
-            ):
+
+            if (date_time < api_start_time):
                 raise InputException(
-                    f"Data before {PageViewApiValidDateRange.TOP_PER_COUNTRY_PAGEVIEW_API_START_DATE.strftime('%Y%m%d')} is not available"
+                    f"Data before {api_start_time.strftime('%Y%m%d')} is not available"
                 )
 
             return self._call_top_view_per_country_api(
@@ -224,12 +226,9 @@ class WikipediaPageViewApiClient:
         else:
             current_date = datetime(year, month, 1)
             # Validate start time
-            if (
-                current_date
-                < PageViewApiValidDateRange.TOP_PER_COUNTRY_PAGEVIEW_API_START_DATE
-            ):
+            if (current_date < api_start_time):
                 raise InputException(
-                    f"Data before {PageViewApiValidDateRange.TOP_PER_COUNTRY_PAGEVIEW_API_START_DATE.strftime('%Y%m%d')} is not available"
+                    f"Data before {api_start_time.strftime('%Y%m%d')} is not available"
                 )
 
             dfs = []
@@ -268,15 +267,17 @@ class WikipediaPageViewApiClient:
         self, request: PerArticlePageViewRequest
     ) -> pd.DataFrame:
         """
-        Given an article and a date range, returns a daily timeseries of its pageview counts.
-        Support filter by access method and/or agent type, and choose between monthly, daily granularity
-        
-        Args:
-            request (PerArticlePageViewRequest): Request data for get page view for a specific artical
+        Given an article and a date range, returns a daily timeseries of its
+        pageview counts. Support filter by access method and/or agent type,
+        and choose between monthly, daily granularity
 
+        Args:
+            request (PerArticlePageViewRequest): Request data for get page
+            view for a specific artical
         Raises:
-            InputException: User input error if start time or end time is invalid or MOBILE access method
-            is specified as current page view API doesn't support this access type
+            InputException: User input error if start time or end time is
+            invalid or MOBILE access method is specified as current page view
+            API doesn't support this access type
         Returns:
             pd.DataFrame: columns:
                 "project": str,
@@ -325,13 +326,16 @@ class WikipediaPageViewApiClient:
 
     def get_top_pageviews(self, request: TopViewedArticleRequest) -> pd.DataFrame:
         """
-        Lists the 1000 most viewed articles timespan (month or day), support filter by access method
+        Lists the 1000 most viewed articles timespan (month or day), support
+        filter by access method
 
         Args:
-            request (TopViewedArticleRequest): Request data for get top viewed article
+            request (TopViewedArticleRequest): Request data for get top viewed
+            article
 
         Raises:
-            InputException: User input error if start time or end time is invalid or out of supported range
+            InputException: User input error if start time or end time is
+            invalid or out of supported range
 
         Returns:
             pd.DataFrame: columns:
@@ -365,7 +369,7 @@ class WikipediaPageViewApiClient:
         is_all_days = False
         try:
             day = int(day)
-        except:
+        except ValueError:
             if day != "all-days":
                 raise InputException(f"Day value {day} only accept 1-31 or all-days")
             is_all_days = True
@@ -376,7 +380,7 @@ class WikipediaPageViewApiClient:
                 year = date_time.strftime("%Y")
                 month = date_time.strftime("%m")
                 day = date_time.strftime("%d")
-            except:
+            except ValueError:
                 raise InputException(f"Invalid date provide:{year}-{month}-{day}")
         else:
             date_time = datetime(year, month, 1)
@@ -384,9 +388,10 @@ class WikipediaPageViewApiClient:
             month = date_time.strftime("%m")
 
         # Validate start time
-        if date_time < PageViewApiValidDateRange.PAGEVIEW_API_START_DATE:
+        api_start_time = PageViewApiValidDateRange.PAGEVIEW_API_START_DATE
+        if date_time < api_start_time:
             raise InputException(
-                f"Data before {PageViewApiValidDateRange.PAGEVIEW_API_START_DATE.strftime('%Y%m%d')} is not available"
+                f"Data before {api_start_time.strftime('%Y%m%d')} is not available"
             )
 
         params = {
@@ -408,16 +413,19 @@ class WikipediaPageViewApiClient:
 
     def get_top_viewed_country(self, request: TopViewedCountryRequest) -> pd.DataFrame:
         """
-        Lists the pageviews to this project, split by country of origin for a given month. 
-        Because of privacy reasons, pageviews are given in a bucketed format, 
-        and countries with less than 100 views do not get reported.
+        Lists the pageviews to this project, split by country of origin for a
+        given month. Because of privacy reasons, pageviews are given in a
+        bucketed format, and countries with less than 100 views do not get
+        reported.
 
         Args:
-            request (TopViewedCountryRequest): Request data for get page views split by country
+            request (TopViewedCountryRequest): Request data for get page views
+            split by country
 
         Raises:
-            InputException: User input error if start time or end time is invalid or out of supported range
-            or MOBILE access method is specified as current page view API doesn't support this access type
+            InputException: User input error if start time or end time is
+            invalid or out of supported range or MOBILE access method is
+            specified as current page view API doesn't support this access type
 
         Returns:
             pd.DataFrame: columns:
@@ -453,9 +461,10 @@ class WikipediaPageViewApiClient:
         month = date_time.strftime("%m")
 
         # Validate start time
-        if date_time < PageViewApiValidDateRange.TOP_BY_COUNTRY_PAGEVIEW_API_START_DATE:
+        api_start_time = PageViewApiValidDateRange.TOP_BY_COUNTRY_PAGEVIEW_API_START_DATE
+        if date_time < api_start_time:
             raise InputException(
-                f"Data before {PageViewApiValidDateRange.TOP_BY_COUNTRY_PAGEVIEW_API_START_DATE.strftime('%Y%m%d')} is not available"
+                f"Data before {api_start_time.strftime('%Y%m%d')} is not available"
             )
 
         params = {

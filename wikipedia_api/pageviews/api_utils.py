@@ -10,7 +10,8 @@ def translate_access_method_to_str(
     access: AccessMethod, is_legacy: bool = False
 ) -> str:
     """
-    Translate the AccessMethod enum to str format, special handling if is_legacy flag is true
+    Translate the AccessMethod enum to str format, special handling if
+    is_legacy flag is true
     """
     if is_legacy:
         if access == AccessMethod.ALL:
@@ -65,11 +66,11 @@ def translate_granularity_to_str(granularity: Granularity) -> str:
 def parse_time_parameter(time_str: str, support_hour: bool = False) -> datetime:
     try:
         dt = datetime.strptime(time_str, "%Y%m%d")
-    except:
+    except ValueError:
         if support_hour:
             try:
                 dt = datetime.strptime(time_str, "%Y%m%d%H")
-            except:
+            except ValueError:
                 raise InputException(f"{time_str} is invalid datetime string")
         else:
             raise InputException(f"{time_str} is invalid datetime string")

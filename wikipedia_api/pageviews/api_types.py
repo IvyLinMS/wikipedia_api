@@ -24,12 +24,14 @@ class AccessMethod(Enum):
     """
 
     # All access include from both desktop and mobile (include app and web),
-    # repsent 'all-access' for page view api and 'all-sites' for legacy page view api
+    # repsent 'all-access' for page view api and 'all-sites' for legacy page
+    # view api
     ALL = 0
-    # Access from desktop, represent 'desktop' for page view api and 'desktop-site' for legacy page view api
+    # Access from desktop, represent 'desktop' for page view api and
+    # 'desktop-site' for legacy page view api
     DESKTOP = 1
-    # Access from mobile, represent 'mobile-app' and 'mobile-web' for page view api and
-    # 'mobile-site' for legacy page view api,
+    # Access from mobile, represent 'mobile-app' and 'mobile-web' for page
+    # view api and 'mobile-site' for legacy page view api,
     MOBILE = 2
     # Access from mobile app, represent 'mobile-app' for page view api
     MOBILE_APP = 3
@@ -73,7 +75,8 @@ class APIHeader(NamedTuple):
 
 class AggregatePageViewRequest(NamedTuple):
     """
-    Request for aggregated page view API, works for both page view api and legacy api
+    Request for aggregated page view API, works for both page view api and
+    legacy api
     """
 
     # Access Method to filter page view data
@@ -99,7 +102,8 @@ class PerArticlePageViewRequest(NamedTuple):
     # Agent Type to filter page view data
     agent: AgentType
     # The title of any article in the specified project.
-    # Any spaces should be replaced with underscores. It also should be URI-encoded
+    # Any spaces should be replaced with underscores. It also should be
+    # URI-encoded
     article: str
     # Granularity level of page view data, support HOURLY, DAILY, MONTHLY
     granularity: Granularity
@@ -120,8 +124,8 @@ class TopViewedArticleRequest(NamedTuple):
     year: int
     # The month of the date for which to retrieve top articles
     month: int
-    # The day of the date for which to retrieve top articles, can be all-days to
-    # get the top articles of a whole month
+    # The day of the date for which to retrieve top articles, can be all-days
+    # to get the top articles of a whole month
     day: Union[int, str]
 
 
@@ -143,7 +147,8 @@ class TopViewedPerCountryRequest(NamedTuple):
     Request for top viewed artical per country api
     """
 
-    # The ISO 3166-1 alpha-2 code of a country for which to retrieve top articles, like 'FR' or 'IN'.
+    # The ISO 3166-1 alpha-2 code of a country for which to retrieve top
+    # articles, like 'FR' or 'IN'.
     country: str
     # Access Method to filter page view data
     access: AccessMethod
@@ -151,6 +156,6 @@ class TopViewedPerCountryRequest(NamedTuple):
     year: int
     # The month of the date for which to retrieve top countries
     month: int
-    # The day of the date for which to retrieve top articles, can be all-days to
-    # get the top articles of a whole month
+    # The day of the date for which to retrieve top articles, can be all-days
+    # to get the top articles of a whole month
     day: Union[int, str]
