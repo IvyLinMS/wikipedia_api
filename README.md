@@ -1,5 +1,5 @@
 # wikipedia_api
-![CI](https://github.com/IvyLinMS/wikipedia_api/workflows/CI/badge.svg?branch=master&event=push)
+![CI](https://github.com/IvyLinMS/wikipedia_api/workflows/CI/badge.svg)
 
 ## Project Motivation
 
