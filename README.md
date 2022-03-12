@@ -1,5 +1,5 @@
 # wikipedia_api
-[![Build Status](https://app.travis-ci.com/IvyLinMS/wikipedia_api.svg?branch=main)](https://app.travis-ci.com/IvyLinMS/wikipedia_api)
+![CI](https://github.com/IvyLinMS/wikipedia_api/workflows/CI/badge.svg?branch=master&event=push)
 
 ## Project Motivation
 
