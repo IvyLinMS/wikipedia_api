@@ -197,7 +197,7 @@
 
 ### Component Diagram Example
 + get_top_view_per_country
- +  ![alt tag](./diagram/GetTopViewed.png)
+![alt tag](./diagram/GetTopViewed.png)
 
 ---
 ### Components interaction
