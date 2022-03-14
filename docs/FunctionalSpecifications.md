@@ -19,24 +19,24 @@ Wikipedia traffic from 2008-2021
 
 ### Use cases. 
 <ol>
-<li>Choosing the instance which will return results as quickly as possible given a budgetary constraint
+<li>Listing the 1000 most viewed articles for a given country and date, across all projects. 
   <ol>
-    <li>USER: Enters a budgetary constraint, say $100.</li>
-    <li>USER: Provides location of algorithm file to be run</li>
-    <li>USER: Provides location of data</li>
-    <li>PROGRAM: Runs benchmark on user’s computer</li>
-    <li>PROGRAM: Runs algorithm with small proportion of data</li>
-    <li>OUTPUT: Suggested best instance for this use case</li>
+    <li>USER Enter1: access=AccessMethod.ALL, year=2015, month=6, day=20</li>
+    <li>USER Enter2: access=AccessMethod.ALL, year=2020, month=1, day="all"</li>
+    <li>PROGRAM: Runs rest_api_call(PageViewApiEndPoints.TOP_VIEW_BY_COUNTRY</li>
+    <li>PROGRAM: Repeat rest_api_call then convert and append to dataframe</li>
+    <li>OUTPUT: Top 1000 most viewed articles for a single day or the whole month</li>
   </ol>
 </li>
-<li>Choosing the instance which will return results within a time window.
+<li>Given a date range, returns a timeseries of pageview counts.
   <ol>
-    <li>USER: Enters a time constraint.</li>
-    <li>USER: Provides location of algorithm file to be run</li>
-    <li>USER: Provides location of data</li>
-    <li>PROGRAM: Runs benchmark on user’s computer</li>
-    <li>PROGRAM: Runs algorithm with small proportion of data</li>
-    <li>OUTPUT: Suggested best instance for this use case</li>
+    <li>USER Enter: access=AccessMethod.MOBILE, agent=AgentType.USER, granularity=Granularity.DAILY, start_time="20101110", end_time="20201111",</li>
+    <li>PROGRAM: Runs get_aggregated_pageviews to rest_api_call https://wikimedia.org/api/rest_v1/metrics/pageviews/aggregate/all-projects </li>
+    <li>OUTPUT: returns a timeseries of pageview counts for access method and Daily/Monthly</li>
   </ol>
 </li>
 </ol>
+
+### Unit Test.
+
+Reference to test folder https://github.com/IvyLinMS/wikipedia_api/tree/main/wikipedia_api/tests.
