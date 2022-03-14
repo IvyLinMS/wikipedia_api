@@ -52,12 +52,17 @@ df = api.get_top_view_per_country(request)
 ## Comparison
 This Wikipedia API wrapper is to make an easy to use class for accessing Wikipedia page view API by providing unified API for page view aggregated data with set only once common parameters such as User-Agent and hide the detail of HTTP request construction, also provide top result per country on monthly level API which currently the Wikipedia API only support daily level.
 
-Comparing to my [Data512 Wikipedia project](https://github.com/IvyLinMS/data-512-a1/blob/main/hcds-a1-data-curation.ipynb), this Wikipedia API wrapper is much more convenient for use. I wrote some code which is using both this Wikipedia API wrapper and the [Wikipedia page view API](https://wikitech.wikimedia.org/wiki/Analytics/AQS/Pageviews). Reference to https://github.com/IvyLinMS/wikipedia_api/blob/main/examples/wikipedia_api_examples.ipynb, you can see very clear the interface is very clean with one simple call, which we encapsulate all the detail calling Restful API and parsing of json data, with returned panda data frame with a deep method.
+Comparing to my [Data512 Wikipedia project](https://github.com/IvyLinMS/data-512-a1/blob/main/hcds-a1-data-curation.ipynb), this Wikipedia API wrapper is much more convenient for use. I wrote some code which is using both this Wikipedia API wrapper and the [Wikipedia page view API](https://wikitech.wikimedia.org/wiki/Analytics/AQS/Pageviews). Reference to https://github.com/IvyLinMS/wikipedia_api/blob/main/examples/wikipedia_api_examples.ipynb, the new interface is very clean with one simple call, which we encapsulate all the detail calling Restful API and parsing of json data, with returned panda data frame with a deep method.
 
-[OriginalCall](./examples/OriginalCALL.png)
+![OriginalCall](./examples/OriginalCALL.png)
 
-[SimpleCall](./examples/OriginalCALL.png)
+![SimpleCall](./examples/OriginalCALL.png)
 
 
 ## Learnings
-For this project, I spent a lot of time for contigu, the reason      
+For this project, I spent a lot of time for setting up continuous integration on this project, there're couple of learning here:
+1. At first, I tried to setup Travis CI, but it never works https://app.travis-ci.com/github/IvyLinMS/wikipedia_api/branches
+2. As an alternative solution, I switched to use GitHub Actions, it saved a lot of time for my manual testing.
+
+Lesson learned I should setup the continuous integration at the beginning of my project, it will be easier at the early stage of the project lifecycle, and the cost will be much less than I setup in the middle of the project, it will save me a lot of cost for debugging and testing!
+
