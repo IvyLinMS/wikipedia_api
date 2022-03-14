@@ -35,14 +35,10 @@ request = TopViewedPerCountryRequest("US", AccessMethod.MOBILE_WEB, 2021, 2, 'al
 df = api.get_top_view_per_country(request)
 
 
-## Components
+## Project Components
 
-+ TODO
-  + Api_types
-  + API_endpoints
-  + API_client
-+ Interface
-+ Function <b>get_top_view_per_country</b>
+[project structure](./diagram/ProjectStruture.jpg)
++ One function example <b>get_top_view_per_country</b>
      +  Lists the 1000 most viewed articles for a given country and date, across all projects. 
         Support filter by access method. Because of privacy reasons, pageview counts are given 
         in a bounded format and are not reported for certain countries. Furthermore, articles 
@@ -54,9 +50,14 @@ df = api.get_top_view_per_country(request)
 
 
 ## Comparison
+This Wikipedia API wrapper is to make an easy to use class for accessing Wikipedia page view API by providing unified API for page view aggregated data with set only once common parameters such as User-Agent and hide the detail of HTTP request construction, also provide top result per country on monthly level API which currently the Wikipedia API only support daily level.
 
-## Limitation
+Comparing to my [Data512 Wikipedia project](https://github.com/IvyLinMS/data-512-a1/blob/main/hcds-a1-data-curation.ipynb), this Wikipedia API wrapper is much more convenient for use. I wrote some code which is using both this Wikipedia API wrapper and the [Wikipedia page view API](https://wikitech.wikimedia.org/wiki/Analytics/AQS/Pageviews). Reference to https://github.com/IvyLinMS/wikipedia_api/blob/main/examples/wikipedia_api_examples.ipynb, you can see very clear the interface is very clean with one simple call, which we encapsulate all the detail calling Restful API and parsing of json data, with returned panda data frame with a deep method.
 
-## Next Step
+[OriginalCall](./examples/OriginalCALL.png)
 
-     
+[SimpleCall](./examples/OriginalCALL.png)
+
+
+## Learnings
+For this project, I spent a lot of time for contigu, the reason      
