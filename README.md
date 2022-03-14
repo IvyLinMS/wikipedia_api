@@ -37,7 +37,7 @@ df = api.get_top_view_per_country(request)
 
 ## Project Components
 
-[project structure](./diagram/ProjectStruture.jpg)
+![project structure](./diagram/ProjectStruture.jpg)
 + One function example <b>get_top_view_per_country</b>
      +  Lists the 1000 most viewed articles for a given country and date, across all projects. 
         Support filter by access method. Because of privacy reasons, pageview counts are given 
@@ -66,3 +66,17 @@ For this project, I spent a lot of time for setting up continuous integration on
 
 Lesson learned I should setup the continuous integration at the beginning of my project, it will be easier at the early stage of the project lifecycle, and the cost will be much less than I setup in the middle of the project, it will save me a lot of cost for debugging and testing!
 
+
+## License
+MIT License
+Copyright (c) 2022 IvyLinMS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
