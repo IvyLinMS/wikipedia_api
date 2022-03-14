@@ -196,8 +196,16 @@
         legacy_df["agent"] = "all-agents"
 
 ### Component Diagram Example
-+ get_top_view_per_country
-![alt tag](./diagram/GetTopViewed.png)
+Component <b>get_top_view_per_country</b>
+     +  Lists the 1000 most viewed articles for a given country and date, across all projects. 
+        Support filter by access method. Because of privacy reasons, pageview counts are given 
+        in a bounded format and are not reported for certain countries. Furthermore, articles 
+        visited by 1000 unique individuals or fewer on the given date will be excluded from the 
+        returned data. Also, views produced by agents categorized as bots or web crawlers will 
+        be excluded from all calculations, if all-days is specified in the day parameter, all data
+        within the specified month will be returned
+     +  ![alt tag](./diagram/GetTopViewed.png)
+
 
 ---
 ### Components interaction
