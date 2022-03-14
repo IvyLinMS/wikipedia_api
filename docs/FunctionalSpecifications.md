@@ -1,12 +1,13 @@
 ## Functional Specifications
 
 ### Background.
-Last quarter I had a class called "DATA 512 A Au 21: Human-Centered Data Science", we did a lot of projects using WikiPedia data, then I found the WikiPedia API is not very convenient to use for our research. Since we learned a lot of Software Design in Data512, so I decided to create a Python package to make an easy to use class for accessing Wikipedia page view API by providing unified API for page view aggregated data with set only once common parameters such as User-Agent and hide the detail of HTTP request construction, also provide top result per country on monthly level API which currently the Wikipedia API only support daily level.
+Last quarter I had a class called "DATA 512 A Au 21: Human-Centered Data Science", we did a lot of projects using Wikipedia data, then I found the Wikipedia API is not very convenient to use for our research. Since we learned a lot of Software Design in Data512, so I decided to create a Python package to make it easy to use class for accessing Wikipedia page view API by providing unified API for page view aggregated data with set only once common parameters such as User-Agent and hide the detail of HTTP request construction, also provide top result per country on monthly level API which currently the Wikipedia API only support daily level.
 
 ### User profile.
 - Researchers
 - Students
 - Corporate Dev/Data Engineers
+
 The users are someone who are using WikiPedia data to doing some research.
 
 ### Data source:
