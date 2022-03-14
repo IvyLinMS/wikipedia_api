@@ -56,7 +56,7 @@ Comparing to my [Data512 Wikipedia project](https://github.com/IvyLinMS/data-512
 
 ![OriginalCall](./examples/OriginalCALL.png)
 
-![SimpleCall](./examples/OriginalCALL.png)
+![SimpleCall](./examples/SimpleCall.png)
 
 
 ## Learnings
