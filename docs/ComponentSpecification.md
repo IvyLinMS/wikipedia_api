@@ -1,39 +1,159 @@
 ## Software Components
 
 ### Component 1: (get_aggregated_pageviews)
-Input (.py file, dataset)  
-If dataset.rows <= 10,000:  
-Run the .py file against 1%, 5%, 10% of dataset  
-Else:  
-Run the .py file against 1,000, 5,000, 10,000 rows  
-Return time taken to run the .py file against the three datasets  
+        Given a date range, returns a timeseries of pageview counts.
+        Support filter by access method and/or agent type, and choose between
+        monthly, daily, hourly granularity
+        if start time specified is between 12/01/2007 and 07/01/2015, legacy
+        API data will be combined with new page view API data if agent type
+        is set to MOBILE and date range include 07/01/2015, both the
+        mobile-app and mobile-web data will be returned
+        Args:
+            request (AggregatePageViewRequest): Request data for get
+            aggregated page view
+        Raises:
+            InputException: User input error if start time or end time is
+            invalid or out of supported range
+
+        Returns:
+            pd.DataFrame: columns:
+                "project": str,
+                "access": str,
+                "agent": str,
+                "granularity": str,
+                "timestamp": str,
+                "views": int 
 
 ### Component 2: (get_top_view_per_country)
-Input (runtime per percent of total rows(default is 1%, 5%, 10%) and the row percents, from Component 2)  
-Fit four optimized curves to the data points using scipy:  
-- Linear  
-- Exponential  
-- Logn
-- nLogn
-Choose the function with the best fit (smallest residuals)
+        Lists the 1000 most viewed articles for a given country and date,
+        across all projects. Support filter by access method. Because of
+        privacy reasons, pageview counts are given in a bounded format and
+        are not reported for certain countries. Furthermore, articles visited
+        by 1000 unique individuals or fewer on the given date will be excluded
+        from the returned data. Also, views produced by agents categorized as
+        bots or web crawlers will be excluded from all calculations, if
+        all-days is specified in the day parameter, all data within the
+        specified month will be returned
 
-Output (expected total time on 100% data)
+        Args:
+            request (TopViewedPerCountryRequest): Request data for get top
+            page viewed article per country
+
+        Raises:
+            InputException: User input error if start time or end time is
+            invalid or out of supported range or MOBILE access method is
+            specified as current page view API doesn't support this access type
+
+        Returns:
+            pd.DataFrame: columns:
+                "country": str,
+                "access": str,
+                "year": str,
+                "month": str,
+                "day": str,
+                "rank": int,
+                "article": str,
+                "project": str,
+                "views_ceil": int
 
 ### Component 3: (get_per_article_pageviews)  
-Input (none)  
-Run known benchmark on user computer(training of keras' percreptron on a full mnist dataset)  
-Return (benchmark runtime)  
-0
+        Given an article and a date range, returns a daily timeseries of its
+        pageview counts. Support filter by access method and/or agent type,
+        and choose between monthly, daily granularity
+
+        Args:
+            request (PerArticlePageViewRequest): Request data for get page
+            view for a specific artical
+        Raises:
+            InputException: User input error if start time or end time is
+            invalid or MOBILE access method is specified as current page view
+            API doesn't support this access type
+        Returns:
+            pd.DataFrame: columns:
+                "project": str,
+                "access": str,
+                "article": str,
+                "agent": str,
+                "granularity": str,
+                "timestamp": str,
+                "views": int
+                
 ### Component 4: (get_top_pageviews)
-Input (None)  
-API connection to AWS real-time EC2 prices  
-Return (Price per hour of each instance in on-demand and spot priceing service)  
+        Lists the 1000 most viewed articles for a given country and date,
+        across all projects. Support filter by access method. Because of
+        privacy reasons, pageview counts are given in a bounded format and
+        are not reported for certain countries. Furthermore, articles visited
+        by 1000 unique individuals or fewer on the given date will be excluded
+        from the returned data. Also, views produced by agents categorized as
+        bots or web crawlers will be excluded from all calculations, if
+        all-days is specified in the day parameter, all data within the
+        specified month will be returned
+
+        Args:
+            request (TopViewedPerCountryRequest): Request data for get top
+            page viewed article per country
+
+        Raises:
+            InputException: User input error if start time or end time is
+            invalid or out of supported range or MOBILE access method is
+            specified as current page view API doesn't support this access type
+
+        Returns:
+            pd.DataFrame: columns:
+                "country": str,
+                "access": str,
+                "year": str,
+                "month": str,
+                "day": str,
+                "rank": int,
+                "article": str,
+                "project": str,
+                "views_ceil": int  
 
 ### Component 5: (get_top_viewed_country)
-Input (Times to run benchmark file on users machine from Component 2, expected total time from Component 3, time taken for the benchmark on AWS from Component 4, and EC2 spot prices from Component 5)  
-Create a dataframe of EC2 instances with added expected time and expected cost columns
+        Given an article and a date range, returns a daily timeseries of its
+        pageview counts. Support filter by access method and/or agent type,
+        and choose between monthly, daily granularity
 
-Output (Dataframe with cost and time estimates)  
+        Args:
+            request (PerArticlePageViewRequest): Request data for get page
+            view for a specific artical
+        Raises:
+            InputException: User input error if start time or end time is
+            invalid or MOBILE access method is specified as current page view
+            API doesn't support this access type
+        Returns:
+            pd.DataFrame: columns:
+                "project": str,
+                "access": str,
+                "article": str,
+                "agent": str,
+                "granularity": str,
+                "timestamp": str,
+                "views": int
+                
+### Component 5: (get_top_viewed_country)
+        Lists the 1000 most viewed articles timespan (month or day), support
+        filter by access method
+
+        Args:
+            request (TopViewedArticleRequest): Request data for get top viewed
+            article
+
+        Raises:
+            InputException: User input error if start time or end time is
+            invalid or out of supported range
+
+        Returns:
+            pd.DataFrame: columns:
+                "project": str,
+                "access": str,
+                "year": str,
+                "month": str,
+                "day": str,
+                "article": str,
+                "views": int
+                "rank":int,
 
 ### Components Private: (_call_top_view_per_country_api, _call_legacy_api, _call_page_view_api, _align_legacy_df_to_pageview_df)
 Input(Dataframe with time and cost estimates per instance, generated by Component 5: recommender)
